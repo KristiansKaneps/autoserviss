@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="{i18n:locale}">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{#insert title}{/}</title>
+    {#insert moreStyles}{/}
+    {#insert moreScripts}{/}
+    {#bundle /}
+  </head>
+  <body>
+    <header>
+      <div>
+        <a href="{uri:HomeController.index}">
+          <img src="/static/images/no-logo.png" alt="Logo" />
+        </a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="{uri:HomeController.index}">{m:nav.home}</a></li>
+          <li><a href="{uri:EShopController.index}">{m:nav.eshop}</a></li>
+          <li><a href="{uri:ServicesController.index}">{m:nav.services}</a></li>
+          <li><a href="{uri:ContactUsController.index}">{m:nav.contact}</a></li>
+          {#if auth:user??}
+          <li><a href="{uri:ProfileController.index}">{m:nav.profile}</a></li>
+          <li><a href="{uri:AuthController.logout}">{m:nav.logout}</a></li>
+          {#else}
+          <li><a href="{uri:AuthController.index}">{m:nav.login}</a></li>
+          {/if}
+        </ul>
+      </nav>
+    </header>
+    <main role="main">
+      <div class="{#insert class}{/}">
+        {#insert}{/}
+      </div>
+      <div>
+      </div>
+    </main>
+    {#insert sections}{/}
+    <footer>
+
+    </footer>
+  </body>
+</html>

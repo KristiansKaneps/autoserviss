@@ -1,0 +1,55 @@
+{#include main.html }
+    {#title}{m:title.register}{/title}
+    {#class}center{/class}
+
+    {#moreStyles}
+        <style type="text/css">
+            form hr:before {
+                content: "{m:content.register.social.or}" !important;
+            }
+        </style>
+    {/moreStyles}
+
+    {#form uri:AuthController.registerAction()}
+        <h4>{m:title.register}</h4>
+        <fieldset>
+            <legend>{m:register.fieldset.personal}</legend>
+            {#formElement name="email" label=m:label.email}
+                <input name="email"
+                       type="email"
+                       placeholder={m:label.email}
+                       class="form-control {#ifError "email"}is-invalid{/ifError}"
+                       maxlength="320"
+                       value={inject:flash.get('email') or email or ''}>
+            {/formElement}
+            <div class="row">
+                {#formElement name="name" label=m:label.name}
+                        {#input name="name"/}
+                {/formElement}
+                {#formElement name="surname" label=m:label.surname}
+                        {#input name="surname"/}
+                {/formElement}
+            </div>
+            {#formElement name="phone" label=m:label.phone}
+                    {#input name="phone" type="tel"/}
+            {/formElement}
+        </fieldset>
+        <fieldset>
+            <legend>{m:register.fieldset.security}</legend>
+            {#formElement name="password" label=m:label.password}
+                    {#input name="password" type="password"/}
+            {/formElement}
+            {#formElement name="password2" label=m:label.password2}
+                    {#input name="password2" type="password"/}
+            {/formElement}
+        </fieldset>
+
+        <button type="submit">{m:button.register.complete}</button>
+        <a href="{uri:AuthController.login()}">{m:link.register.alreadyregistered}</a>
+        <hr>
+        <div class="social-login">
+            <button>Register with Google</button>
+            <button>Register with Facebook</button>
+        </div>
+    {/form}
+{/include}

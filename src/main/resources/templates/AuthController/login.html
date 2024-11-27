@@ -1,0 +1,33 @@
+{#include main.html}
+    {#title}{m:title.login}{/title}
+    {#class}vertical-center{/class}
+
+    <h5>{m:content.login.greeting}</h5>
+
+    <div>
+        {#form uri:AuthController.loginAction()}
+            <fieldset>
+                <legend>{m:title.login}</legend>
+                {#formElement name="email" label=m:label.email}
+                        {#input name="email" type="email"/}
+                {/formElement}
+                {#formElement name="password" label=m:label.password}
+                        {#input name="password" type="password"/}
+                {/formElement}
+                <button type="submit">{m:button.login}</button>
+            </fieldset>
+        {/form}
+    </div>
+    <div>
+        {#form uri:AuthController.startRegistrationAction()}
+            <fieldset>
+                <legend>{m:title.register}</legend>
+                {#formElement name="registerEmail" label=m:label.email}
+                        {#input name="registerEmail"/}
+                {/formElement}
+                <button type="submit" class="secondary">{m:button.register}</button>
+            </fieldset>
+        {/form}
+    </div>
+
+{/include}

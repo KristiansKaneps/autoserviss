@@ -1,0 +1,44 @@
+{#include main.html}
+    {#title}{m:title.home}{/title}
+
+    <h5>{m:content.home.greeting}</h5>
+    <h1>{m:content.home.heading}</h1>
+    <p>{m:content.home.paragraph}</p>
+
+    {#sections}
+        <div class="main-section">
+            <div class="section-intro-title">
+                <h2>{m:content.home.appointment.heading}</h2>
+                <p>{m:content.home.appointment.paragraph}</p>
+            </div>
+            <div class="subsections">
+                <div class="left">
+                    <h6>{m:content.home.appointment.subsection.offerings}</h6>
+                    <div>
+                        <h5>{m:content.home.appointment.subsection.offerings.first}</h5>
+                        <p>{m:content.home.appointment.subsection.offerings.first.paragraph}</p>
+                        <h5>{m:content.home.appointment.subsection.offerings.second}</h5>
+                        <p>{m:content.home.appointment.subsection.offerings.second.paragraph}</p>
+                    </div>
+                    <h6>{m:content.home.appointment.subsection.parts}</h6>
+                    <div>
+                        <h5>{m:content.home.appointment.subsection.parts.first}</h5>
+                        <p>{m:content.home.appointment.subsection.parts.first.paragraph}</p>
+                    </div>
+                    <div>
+                        <h5>{m:content.home.appointment.subsection.parts.second}</h5>
+                        <p>{m:content.home.appointment.subsection.parts.second.paragraph}</p>
+                    </div>
+                    <div>
+                        <h5>{m:content.home.appointment.subsection.parts.third}</h5>
+                        <p>{m:content.home.appointment.subsection.parts.third.paragraph}</p>
+                    </div>
+                </div>
+                <div class="cards">
+
+                </div>
+            </div>
+        </div>
+    {/sections}
+
+{/include}

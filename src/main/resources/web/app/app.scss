@@ -1,0 +1,303 @@
+@import './fonts';
+@import './theme-light';
+@import './utils';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: $bg-color-primary;
+  font-family: Syne, sans-serif;
+  color: $text-light;
+}
+
+h1, h2, h3, h4 {
+  font-family: Quattrocento, serif;
+  font-weight: bold;
+  color: $heading-fg-light;
+}
+
+h1 {
+  font-size: 5.5rem;
+}
+h2 {
+  font-size: 3em;
+}
+h3 {
+  font-size: 2.5em;
+}
+h4 {
+  font-size: 2em;
+}
+
+h5, h6 {
+  font-family: Syne, sans-serif;
+  font-weight: 500;
+  color: $intro-fg-light;
+}
+
+h5 {
+  font-size: 1.3em;
+}
+h6 {
+  font-size: 1.2em;
+}
+
+.horizontal-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.vertical-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+input[type="submit"]:not(.a), input[type="button"]:not(.a), button:not(.a) {
+  padding: 1em;
+  min-width: 8em;
+  font-family: Syne, sans-serif;
+  font-weight: 600;
+  line-height: 120%;
+  border-radius: 0.75em;
+  border: 1px solid $button-border-light;
+  cursor: pointer;
+  transition: background-color 50ms linear;
+  &:hover {
+    background-color: $button-bg-light-hover;
+  }
+}
+
+.dark input[type="submit"]:not(.a), .dark input[type="button"]:not(.a), .dark button:not(.a) {
+  border-color: $button-border-dark;
+  &:hover {
+    background-color: $button-bg-dark-hover;
+  }
+}
+
+input[type="submit"]:not(.a), button:not(.a) {
+  background: $button-bg-light;
+  color: $button-fg-light;
+}
+
+.dark input[type="submit"]:not(.a), .dark button:not(.a) {
+  background: $button-bg-dark;
+  color: $button-fg-dark;
+}
+
+input[type="button"]:not(.a), button.secondary:not(.a) {
+  background: $button-bg-light-secondary;
+  color: $button-fg-light-secondary;
+  border-color: $button-border-light-secondary;
+  &:hover {
+    background-color: $button-bg-light-secondary-hover;
+  }
+}
+
+.dark input[type="button"]:not(.a), .dark button.secondary:not(.a) {
+  background: $button-bg-dark-secondary;
+  color: $button-fg-dark-secondary;
+  border-color: $button-border-dark-secondary;
+  &:hover {
+    background-color: $button-bg-dark-secondary-hover;
+  }
+}
+
+input[type="submit"]:not(.a), button:not(.secondary):not(.a) {
+  @include shadow;
+}
+
+.disabled {
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+//button.a, input[type="button"].a, input[type="submit"] {
+//  border: none;
+//}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+  height: $header-height;
+  margin: 0;
+  padding: 0 $header-side-padding;
+  background: $bg-color-primary;
+  transition: background-color 250ms linear, color 250ms linear;
+  & a, & button.a, & input[type="button"].a {
+    text-decoration: none;
+    color: $nav-fg-light;
+  }
+  & > div {
+    height: 100%;
+    min-width: $header-side-padding;
+    display: inline-block;
+    float: left;
+    user-select: none;
+    & img {
+      padding: 4px;
+      height: calc(100% - 8px);
+    }
+  }
+  & > nav {
+    height: 100%;
+    display: inline-block;
+    float: right;
+    & > ul {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      list-style: none;
+      display: flex;
+      & > li {
+        display: flex;
+        align-items: center;
+        padding: 1em;
+      }
+    }
+  }
+}
+
+header.dark {
+  background: $bg-color-secondary;
+  color: $text-dark;
+  & a {
+    color: $nav-fg-dark;
+  }
+}
+
+main, div.main-section {
+  display: flex;
+  margin: 0;
+  padding: $header-height $main-side-padding 0;
+  width: 100%;
+  height: 100vh;
+}
+
+main {
+  & > *:first-child {
+    padding: 0 0 $header-height;
+    margin-top: 3em;
+    &.vertical-center, &.center {
+      margin-top: 0;
+    }
+  }
+}
+
+div.main-section {
+  flex-direction: column;
+  & > *:first-child {
+    margin-top: 1em;
+    &.vertical-center, &.center {
+      margin-top: 0;
+    }
+  }
+}
+
+div.main-section:nth-child(odd) {
+  background: $bg-color-secondary;
+  color: $text-dark;
+  & h1, h2, h3, h4, h5, h6 {
+    color: $intro-fg-dark;
+  }
+}
+
+.section-intro-title {
+  margin: 0 auto 32px;
+  & > h1, & > h2, & > h3, & > h4 {
+    margin-bottom: 24px;
+    text-align: center;
+  }
+  & > p {
+    text-align: center;
+  }
+}
+
+.subsections {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 48px;
+  & > div.left {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+  }
+  & > div.right {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+  }
+
+  & h5 {
+    margin: 12px 0 4px;
+  }
+
+  & h6 {
+    font-size: 14px;
+    color: $subsection-fg-light;
+    margin: 24px 0 8px;
+  }
+
+  & .left {
+    & > div {
+      margin-left: 64px;
+    }
+  }
+}
+
+div.main-section:nth-child(odd) .subsections {
+  & h6 {
+    color: $subsection-fg-dark;
+  }
+}
+
+.cards {
+
+}
+
+div.main-section:nth-child(odd) .cards {
+
+}
+
+main {
+  & > div:first-child {
+    flex: 1;
+  }
+  & > div:last-child {
+    flex: 1;
+    content: "";
+    background-image: url('../static/images/bmw-z4.webp');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+}
+
+footer {
+  margin: 0;
+  padding: 0 $footer-side-padding;
+  width: 100%;
+  height: 8em;
+  background: $footer-bg;
+}

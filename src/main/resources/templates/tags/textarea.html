@@ -1,0 +1,4 @@
+<textarea name="{name}"
+       placeholder="{placeholder ?: ''}"
+       class="form-control {#ifError name}is-invalid{/ifError}"
+       maxlength="{global:VARCHAR_SIZE}">{inject:flash.get(name)}</textarea>

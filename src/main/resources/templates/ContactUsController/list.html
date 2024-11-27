@@ -1,0 +1,45 @@
+{@java.util.List<lv.kristianskaneps.autoserviss.model.ContactUs> entities}
+{#include main.html}
+    {#title}Contact Us{/title}
+
+    <h1>Contact Us</h1>
+
+    <ul>
+        {#for entity in entities}
+            <li>
+                <p>{entity.createdAt.toString()}</p><br>
+                <p>{entity.name}</p><br>
+                <p>{entity.email}</p><br>
+                <p>{entity.subject}</p><br>
+                <p>{entity.content}</p>
+            </li>
+        {/for}
+    </ul>
+
+    {#form uri:ContactUsController.add() method="POST"}
+        <legend>Contact us</legend>
+        <fieldset>
+            {#formElement name="name" label="Name"}
+                {#input name="name" type="text"/}
+            {/formElement}
+
+            {#formElement name="email" label="E-Mail"}
+                {#input name="email" type="email"/}
+            {/formElement}
+
+            {#formElement name="phone" label="Phone"}
+                {#input name="phone" type="text"/}
+            {/formElement}
+
+            {#formElement name="subject" label="Subject"}
+                {#input name="subject" type="text"/}
+            {/formElement}
+
+            {#formElement name="content" label="Content"}
+                {#textarea name="content"/}
+            {/formElement}
+
+            <input type="submit" value="Send"/>
+        </fieldset>
+    {/form}
+{/include}

@@ -1,0 +1,60 @@
+services:
+
+#  app:
+#    image: kristians/autoserviss:latest
+#    environment:
+#      JAVA_OPTS: -Xmx1024M
+#      LANGUAGE: lv_LV:lv
+#      # OFF FATAL ERROR WARN INFO DEBUG TRACE ALL
+#      QUARKUS_LOG_LEVEL: WARN
+#      QUARKUS_DATASOURCE_JDBC_URL: jdbc:oracle:thin:@//db:1521/orclpdb1
+#    depends_on:
+#      - db
+#      - mailcatcher
+#    ports:
+#      - 8080:8080
+
+  db:
+    container_name: autoserviss_db
+    build:
+      context: ./docker/oracle
+      dockerfile: Dockerfile
+    volumes:
+      - oradata:/opt/oracle/oradata
+      - ./docker/oracle/custom/setupInstance.sh:/opt/oracle/scripts/startup/setupInstance.sh
+      - ./docker/oracle/custom/init-custom.sh:/docker-entrypoint-initdb.d/init-custom.sh
+    mem_reservation: 2g
+    environment:
+      DB_EDITION: ee # xe, ee
+      ORACLE_SID: autoserviss
+      ORACLE_USR: autoserviss
+      ORACLE_PWD: root
+      ORACLE_CHARACTERSET: AL32UTF8
+    ports:
+      - 1521:1521
+    # Health check is already included in Dockerfile
+#    healthcheck:
+#      test: [ "CMD", "/opt/oracle/checkDBStatus.sh" ]
+#      interval: 2s
+
+#  selenium-chrome:
+#    container_name: autoserviss_selenium
+#    image: selenium/standalone-chrome
+#    shm_size: 1g
+#    ports:
+#      - 4444:4444
+#    extra_hosts:
+#      - "host.docker.internal:host-gateway"
+
+  mailcatcher:
+    container_name: autoserviss_mailcatcher
+    image: schickling/mailcatcher
+    ports:
+      - 82:1080
+      - 1025:1025
+
+volumes:
+  oradata:
+
+networks:
+  default:

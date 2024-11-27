@@ -1,0 +1,12 @@
+{#include main.html }
+    {#title}{m:title.logout}{/title}
+
+    <div>
+        {#form uri:AuthController.logoutAction()}
+            <fieldset>
+                <button type="submit">{m:button.logout}</button>
+            </fieldset>
+        {/form}
+    </div>
+
+{/include}
