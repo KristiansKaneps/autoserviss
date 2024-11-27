@@ -72,7 +72,7 @@ public class AuthController extends ControllerWithUser<User> {
             validation.keep(); // keep the errors for the next request
             login();
         } else if (!user.checkPassword(password)) {
-            validation.addError("email", "Invalid password");
+            validation.addError("password", "Invalid password");
 //            prepareForErrorRedirect();
             flash("email", email); // add http parameters to the flash scope
             validation.keep(); // keep the errors for the next request
@@ -158,13 +158,6 @@ public class AuthController extends ControllerWithUser<User> {
         validation.required("password2", password2);
         validation.equals("password", password, password2);
 
-        final User user = new User(
-                email,
-                name,
-                surname,
-                new PhoneNumber(phone)
-        );
-
         final boolean exists = repository.existsByEmail(email);
 
         if (exists) {
@@ -177,17 +170,24 @@ public class AuthController extends ControllerWithUser<User> {
             flash("surname", surname);
             flash("phone", phone);
             return Response.seeOther(Router.getURI(AuthController::register)).build();
-        } else {
-            user.setPassword(User.hashPassword(password));
-            user.setStatus(User.Status.REGISTERED_UNCONFIRMED);
-
-            repository.persist(user);
-
-            final Response.ResponseBuilder responseBuilder = Response.seeOther(Router.getURI(AuthController::welcome));
-            final NewCookie cookie = security.makeUserCookie(user);
-            responseBuilder.cookie(cookie);
-            return responseBuilder.build();
         }
+
+        final User user = new User(
+                email,
+                name,
+                surname,
+                new PhoneNumber(phone)
+        );
+
+        user.setPassword(User.hashPassword(password));
+        user.setStatus(User.Status.REGISTERED_UNCONFIRMED);
+
+        repository.persist(user);
+
+        final Response.ResponseBuilder responseBuilder = Response.seeOther(Router.getURI(AuthController::welcome));
+        final NewCookie cookie = security.makeUserCookie(user);
+        responseBuilder.cookie(cookie);
+        return responseBuilder.build();
     }
 
     @Authenticated

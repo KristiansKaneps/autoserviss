@@ -52,9 +52,7 @@ public class ContactUsController extends ControllerWithUser<User> {
             @RestForm("content") @NotBlank @Length(max = 255)
             @NotNull String content
     ) {
-        // If validation fails, redirect to the todos page (with errors propagated)
         if (validationFailed()) {
-            // redirect to the index page by just calling the method: it does not return!
             index();
         } else {
             ContactUs contactUs = new ContactUs(
